@@ -9,9 +9,14 @@ const args = minimist(process.argv.slice(2));
 if (args.h) {
 	show_help();
 }
-
-const timezone = moment.tz.guess();
+// Setup default values
+let timezone = moment.tz.guess();
+if (args.z) {
+	timezone = args.z;
+}
 const days = args.d;
+let start_date = moment().utc().format('Y-MM-DD');
+let end_date = moment().utc().format('Y-MM-DD');
 let latitude;
 let longitude;
 if (args.n) {
@@ -26,9 +31,13 @@ if (args.e) {
 }
 
 // Make a request
-const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=precipitation&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone);
+const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=precipitation&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone + '&start_date=' + start_date + '&end_date=' + end_date);
 const data = await response.json();
 console.log(data);
+if (args.j) {
+	console.log(data);
+	process.exit(0);
+}
 
 // Show help info
 function show_help() {
