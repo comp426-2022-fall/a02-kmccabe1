@@ -10,9 +10,25 @@ if (args.h) {
 	show_help();
 }
 
+const timezone = moment.tz.guess();
+const days = args.d;
+let latitude;
+let longitude;
+if (args.n) {
+	latitude = args.n;
+}else if (args.s) {
+	latitude = -args.s;
+}
+if (args.e) {
+	longitude = args.e;
+}else if (args.w) {
+	longitude = -args.w;
+}
 
-const timezone = moment.tz.guest();
-
+// Make a request
+const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=precipitation&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone);
+const data = await response.json();
+console.log(data);
 
 // Show help info
 function show_help() {
