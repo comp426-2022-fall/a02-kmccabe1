@@ -9,14 +9,15 @@ const args = minimist(process.argv.slice(2));
 if (args.h) {
 	show_help();
 }
-// Setup default values
+// Setup default values and update if arguments given
 let timezone = moment.tz.guess();
 if (args.z) {
 	timezone = args.z;
 }
-const days = args.d;
-let start_date = moment().utc().format('Y-MM-DD');
-let end_date = moment().utc().format('Y-MM-DD');
+let days = 1;
+if (args.d) {
+	days = args.d;
+}
 let latitude;
 let longitude;
 if (args.n) {
@@ -31,12 +32,23 @@ if (args.e) {
 }
 
 // Make a request
-const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&hourly=precipitation&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone + '&start_date=' + start_date + '&end_date=' + end_date);
+const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&daily=precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone);
 const data = await response.json();
-console.log(data);
+// Handle -j argument
 if (args.j) {
 	console.log(data);
 	process.exit(0);
+}
+// Check if you will need your galoshes
+if (data.daily.precipitation_hours[days] > 0) {
+	console.log("You might need your galoshes ");
+	if (days == 0) {
+		console.log("today.");
+	}else if (days > 1) {
+		console.log("in " + days + " days.");
+	}else {
+		console.log("tomorrow.");
+	}
 }
 
 // Show help info
