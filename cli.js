@@ -30,6 +30,9 @@ if (args.e) {
 }else if (args.w) {
 	longitude = -args.w.toFixed(2);
 }
+if (latitude == null || longitude == null) {
+	process.exit(1);
+}
 
 // Make a request
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current_weather=true&daily=precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone);
