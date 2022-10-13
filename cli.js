@@ -15,20 +15,20 @@ if (args.z) {
 	timezone = args.z;
 }
 let days = 1;
-if (args.d) {
+if (args.d >= 0) {
 	days = args.d;
 }
 let latitude;
 let longitude;
 if (args.n) {
-	latitude = args.n;
+	latitude = args.n.toFixed(2);
 }else if (args.s) {
-	latitude = -args.s;
+	latitude = -args.s.toFixed(2);
 }
 if (args.e) {
-	longitude = args.e;
+	longitude = args.e.toFixed(2);
 }else if (args.w) {
-	longitude = -args.w;
+	longitude = -args.w.toFixed(2);
 }
 
 // Make a request
