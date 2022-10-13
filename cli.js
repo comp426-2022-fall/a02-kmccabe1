@@ -41,16 +41,17 @@ if (args.j) {
 }
 // Check if you will need your galoshes
 if (data.daily.precipitation_hours[days] > 0) {
-	console.log("You might need your galoshes ");
-	if (days == 0) {
-		console.log("today.");
-	}else if (days > 1) {
-		console.log("in " + days + " days.");
-	}else {
-		console.log("tomorrow.");
-	}
+	process.stdout.write("You might need your galoshes ");
+}else {
+	process.stdout.write("You will not need your galoshes ");
 }
-
+if (days == 0) {
+	console.log("today.");
+}else if (days > 1) {
+	console.log("in " + days + " days.");
+}else {
+	console.log("tomorrow.");
+}
 // Show help info
 function show_help() {
 	console.log("Usage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE\n")
