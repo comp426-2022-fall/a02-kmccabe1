@@ -33,9 +33,6 @@ if (args.e) {
 	longitude = Math.round(-args.w * 100) / 100;
 }else {
 	console.log("Longitude must be in range");
-if (latitude == null || longitude == null) {
-//	process.exit(1);
-
 }
 
 
