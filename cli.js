@@ -26,7 +26,6 @@ if (args.n) {
 	latitude = Math.round(-args.s * 100) / 100;
 }else {
 	console.log("Latitude must be in range");
-	process.exit(1);
 }
 if (args.e) {
 	longitude = Math.round(args.e * 100) / 100;
@@ -37,7 +36,6 @@ if (latitude == null || longitude == null) {
 	process.exit(1);
 }else {
 	console.log("Longitude must be in range");
-	process.exit(1);
 }
 
 // Make a request
