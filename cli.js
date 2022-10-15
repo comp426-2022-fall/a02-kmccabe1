@@ -18,17 +18,17 @@ let days = 1;
 if (args.d >= 0) {
 	days = args.d;
 }
-let latitude;
-let longitude;
+let latitude = 35;
+let longitude = -75;
 if (args.n) {
-	latitude = args.n.toFixed(2);
+	latitude = Math.round(args.n * 100) / 100;
 }else if (args.s) {
-	latitude = -args.s.toFixed(2);
+	latitude = Math.round(-args.s * 100) / 100;
 }
 if (args.e) {
-	longitude = args.e.toFixed(2);
+	longitude = Math.round(args.e * 100) / 100;
 }else if (args.w) {
-	longitude = -args.w.toFixed(2);
+	longitude = Math.round(-args.w * 100) / 100;
 }
 if (latitude == null || longitude == null) {
 	process.exit(1);
