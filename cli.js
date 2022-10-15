@@ -31,12 +31,13 @@ if (args.e) {
 	longitude = Math.round(args.e * 100) / 100;
 }else if (args.w) {
 	longitude = Math.round(-args.w * 100) / 100;
-}
-if (latitude == null || longitude == null) {
-	process.exit(1);
 }else {
 	console.log("Longitude must be in range");
+if (latitude == null || longitude == null) {
+//	process.exit(1);
+
 }
+
 
 // Make a request
 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=' + latitude + '&longitude=' + longitude + '&current_weather=true&daily=precipitation_hours&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=' + timezone);
